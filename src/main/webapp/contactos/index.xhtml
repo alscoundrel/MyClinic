@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+	<h:head>
+		<title>#{agreementMB.marca}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<h:outputStylesheet name="css/geral.css" />
+	</h:head>
+
+    <h:body>
+  
+        <ui:insert name="menu" >
+          <ui:include src="../WEB-INF/templates/menu_out.xhtml" />
+        </ui:insert>
+            
+		<!-- conteúdo - onde tudo acontece -->
+		<div id="sector4" class="container-fluid parallax">
+		    
+		    <div class="row d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+		        <div class="w-responsive col-12 col-md-6 overflow-hidden">
+		            <!-- inicio formulario -->
+		            <div class="expo-contactos">
+		                <!-- Form de contactos -->
+		                <h5><strong>Entre em contacto connosco</strong></h5>
+		                <p>Estamos à distancia de um clique. Seja curioso, não hesite em contactar-nos.</p>
+
+		                <div>
+							<b:form horizontal="true" id="form">
+							  <b:inputText label-small-screen="4" small-screen="8"  label="Nome:"
+							               value="#{contactoMB.nome}" tooltip="Seu nome" validatorMessage="Nome: Verifique tamanho entre 9 e 30 caracteres">
+							  	<f:validateLength/>
+							  </b:inputText>
+							  <b:inputText label-small-screen="4" small-screen="8"  label="Contacto:"
+							               value="#{contactoMB.contacto}" tooltip="Um contacto">
+							  </b:inputText>
+							  <b:inputText label-small-screen="4" small-screen="8"  label="E-Mail:"
+							               value="#{contactoMB.emailDe}" tooltip="Faculte um endereço de E-Mail" required="true" validatorMessage="Formato do e-mail inválido">
+								  <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							  </b:inputText>
+							  <b:inputText label-small-screen="4" small-screen="8"  label="Assunto" required="true"
+							               value="#{contactoMB.nome}" tooltip="Assunto da mensagem" validatorMessage="Assunto: Tamanho insuficiente">
+							      <f:validateLength minimum="10"/>
+							  </b:inputText>
+							               
+							  <b:inputTextarea label-small-screen="4" small-screen="8" label="Mensagem"
+							                   value="#{contactoMB.corpo}" required="true"
+							                   tooltip="mensagem" validatorMessage="Mensagem: Tamanho insuficiente">
+							      <f:validateLength minimum="20"/>
+							  </b:inputTextarea>
+							  
+							  <b:selectBooleanCheckbox id="chkTermos" value="#{contactoMB.aceitouTermos}" caption="Nossa Política de Privacidade"
+							  	required="true" label="Aceita" label-small-screen="4" small-screen="8"/>
+							  
+							  <b:formGroup id="grupoEnviar" label-small-screen="4" small-screen="8" style="text-align:right;">
+							  	<b:label text=""></b:label>
+							  	<b:commandButton id="btEnviar" value="Enviar" ajax="true" update="@form" look="success"  style="width:80px;" action="#{contactoMB.envia()}"/>
+							  </b:formGroup>
+							  <b:messages id="msgs" style="text-align:left"/>
+							</b:form>
+							<a id="atrigger" class="btn btn-primary" href="#amodal" data-toggle="modal">Política de Privacidade</a>
+		                </div>
+		                
+		                
+		                				                	
+	                	<!-- Modal -->
+	                	<b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
+		                            <div class="modal-body text-justify">
+		                                <p>A presente Política de Privacidade explica o que fazemos com os seus dados pessoais.
+		                                    Descreve de que modo recolhemos, utilizamos e tratamos os seus dados pessoais e, ao
+		                                    fazê-lo, de que modo cumprimos as nossas obrigações legais em relação a si. A sua
+		                                    privacidade é importante para nós e estamos empenhados em proteger e salvaguardar os
+		                                    seus dados pessoais.&nbsp;</p>
+		
+		                                <p>Por favor dedique alguns instantes a conhecer as nossas práticas de privacidade. Caso
+		                                    tenha quaisquer questões, contacte-nos através do email privacidade@kfkg.xpto ou
+		                                    através do endereço postal Avenida do Mundo N.º 121, 1º Piso, 3500-001 Viseu.&nbsp;
+		                                </p>
+		
+		                                <p>Tentámos manter esta Política de Privacidade tão simples quanto possível, mas, caso
+		                                    não esteja familiarizado com algum dos termos utilizados ou tiver quaisquer dúvidas,
+		                                    não hesite em entrar em contato connosco para obter mais esclarecimentos.&nbsp;</p>
+		
+		                                <p>Ocasionalmente, poderemos alterar a presente Política de Privacidade. Se pretender
+		                                    manter-se atualizado, visite esta página, dado que todas as alterações serão
+		                                    publicadas aqui.&nbsp;</p>
+		                            </div>
+			                          <f:facet name="footer" id="linhaConfirma">
+			                          		<b:button value="Aceitar" look="primary" dismiss="modal"
+												onclick="document.getElementById('input_form:chkTermos').checked='checked'"
+										    ></b:button>
+										    
+									  </f:facet>
+								</b:modal>
+								
+		                
+		                	
+		                <!--/ Form de contactos -->
+		            </div>
+		        </div> <!-- fim formulario -->
+		        <div class="w-responsive col-12 col-md-6 overflow-hidden">
+		            <!-- contactos -->
+		            <div class="expo-contactos">
+		                <div class="media">
+		                    <div class="media-body">
+		                        <h5 class="mt-0 mb-1 text-white">Escritório</h5>
+		                        <div class="office">
+		                            <h2>Viseu</h2>
+		                            <p>Avenida do Mundo N.º 121, 1º Piso<br />3500-001 Viseu</p>
+		                        </div>
+		                        <div class="office">
+		                            <div class="email">
+		                                <span><i class="fas fa-at"></i><a href="geral@cligest.xpto"
+		                                        target="_blank"> geral@ghmail.xpto</a></span>
+		                            </div>
+		                            <div class="phone">
+		                                <span><i class="fas fa-phone"></i><a href="tel:232 000 000"> 232 000 000</a></span>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <a class="map-btn"
+		                        href="https://www.google.pt/maps/place/40%C2%B039'34.2%22N+7%C2%B054'41.6%22W/@40.659491,-7.9121012,19z/data=!3m1!4b1!4m6!3m5!1s0x0:0x0!7e2!8m2!3d40.6594898!4d-7.9115544"
+		                        target="_blank" rel="noopener noreferrer">
+		                        <img class="ml-3 img-fluid rounded border-secondary" src="../resources/img/mapa.jpg" alt="Generic placeholder image" width="200px"/>
+		                    </a>
+		                </div>
+		            </div>
+		        </div> <!-- fim contactos -->
+		    </div> <!-- fim row -->
+		</div><!-- fim container parallax -->
+		
+        <ui:insert name="footer" >
+          <ui:include src="../WEB-INF/templates/page_footer.xhtml" />
+        </ui:insert>
+    </h:body>
+  
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:body onload="">
+  
+        <ui:composition template="../../WEB-INF/templates/layout.xhtml">
+  			<ui:define name="content">
+  				<b:container class="center"><h3 style="margin-top:0">Editar Utilizador</h3></b:container>
+  				
+  				<b:container style="margin:auto;">
+  					<b:container style="width:420px;">
+						<b:form id="form" horizontal="true">
+							<b:inputText value="#{utilizadorMB.utilizador.nomeUtilizador}" readonly="true" label="Utilizador:"  colMd="8" labelColMd="4"/>
+							<br/>
+							<b:inputSecret value="#{utilizadorMB.palavraPasse}" placeholder="Palavra-Passe" required="true" requiredMessage="Palavra-Passe é obrigatória." label="Palavra-Passe:"  colMd="8" labelColMd="4">
+								<f:validateLength minimum="5" maximum="20" />
+							</b:inputSecret>
+							<br/>
+							<b:inputSecret value="#{utilizadorMB.confirmaPalavraPasse}" placeholder="Confirmação da Palavra-Passe" required="true" requiredMessage="Confirmação da palavra-passe é obrigatória." label="Confirmação:"  colMd="8" labelColMd="4"/>
+							<br/>
+							<b:selectOneMenu  value="#{utilizadorMB.utilizador.nivel}" required="true" requiredMessage="Nível é obrigatório." label="Nível:"  colMd="8" labelColMd="4">
+							  <f:selectItem itemValue="" itemLabel="(Seleccione)"></f:selectItem>
+							  <f:selectItem itemValue="P" itemLabel="Paciente"></f:selectItem>
+							  <f:selectItem itemValue="M" itemLabel="Médico"></f:selectItem>
+							  <f:selectItem itemValue="A" itemLabel="Administrador"></f:selectItem>
+							  <f:selectItem itemValue="S" itemLabel="Secretária"></f:selectItem>
+							</b:selectOneMenu>
+						
+							<b:messages id="msgs" style="text-align:left;"/>
+				 			<b:formGroup style="text-align:right;margin: 0;">
+					 			<b:commandButton label="" value="Actualizar" id="btnForm" update="@form" process="@form" action="#{utilizadorMB.actualizar()}" icon="ui-icon-star" style="width:92px;"></b:commandButton>
+					    	</b:formGroup>
+						</b:form>
+					</b:container>
+				</b:container>
+            </ui:define>
+            
+        </ui:composition>
+    </h:body>
+  
+</html>

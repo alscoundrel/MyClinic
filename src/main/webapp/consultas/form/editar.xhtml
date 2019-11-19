@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:body onload="">
+  
+        <ui:composition template="../../WEB-INF/templates/layout.xhtml">
+  			<ui:define name="content">
+  				<b:container class="center"><h3 style="margin-top:0">Editar Consulta</h3></b:container>
+  				
+  				<b:container style="margin:auto;">
+  					<b:container class="caixa_login" style="margin:auto;width:875px;">
+						<b:form id="form" horizontal="true">
+							<b:selectOneMenu value="#{consultaMB.id_pacienteSelected}" required="true" requiredMessage="Paciente é obrigatório." label="Paciente:" colMd="10"  labelColMd="2" select2="true">
+								<f:selectItem itemLabel="(Seleccione)" itemValue="" />
+		    					<f:selectItems value="#{consultaMB.pacienteDAO.getLista()}" var="c" itemValue="#{c.id}" itemLabel="#{c.nome}"/>
+		    				</b:selectOneMenu>
+							<br/>
+							<b:selectOneMenu value="#{consultaMB.id_medicoSelected}" required="true" requiredMessage="Médico é obrigatório." label="Médico:" colMd="10"  labelColMd="2" select2="true">
+								<f:selectItem itemLabel="(Seleccione)" itemValue="" />
+		    					<f:selectItems value="#{consultaMB.medicoDAO.getLista()}" var="c" itemValue="#{c.id}" itemLabel="#{c.nome}"/>
+		    				</b:selectOneMenu>
+							<br/>
+							<b:dateTimePicker value="#{consultaMB.marcacao}"  required="true" requiredMessage="Marcação é obrigatória."
+							                    allow-input-toggle="false" icon-position="left" mode="" side-by-side="true"
+							                    show-date="true" show-time="true" show-icon="true" use-current="true"
+							                    format="YYYY-MM-DD HH:mm"
+							                    placeholder="Marcação" label="Marcação:" colMd="10" labelColMd="2">
+								<f:convertDateTime pattern="yyy-MM-dd HH:mm"/>
+							</b:dateTimePicker>
+							<br/>
+							<b:selectBooleanCheckbox rendered="#{permissoesMB.areaConsultas[4]}" value="#{consultaMB.consulta.cancelada}" caption="" label="Cancelar" colMd="10" labelColMd="2"/>
+							<br/>
+						    <b:inputTextarea rendered="#{permissoesMB.areaConsultas[5]}" value="#{consultaMB.consulta.prescricao}" placeholder="Prescrição" label="Prescrição:" colMd="10" labelColMd="2"/>
+						    
+						    
+							<b:messages id="msgs" style="text-align:left;"/>
+					 		<b:formGroup style="text-align:right;margin: 0;">
+					 			<b:commandButton label="" value="Actualizar" id="btnForm" update="@form" process="@form" action="#{consultaMB.actualizar()}" icon="ui-icon-star" style="width:92px;"></b:commandButton>
+					    	</b:formGroup>
+						</b:form>
+					</b:container>
+				</b:container>
+
+            </ui:define>
+            
+        </ui:composition>
+    </h:body>
+  
+</html>

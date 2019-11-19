@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui">
+	
+	<h:body>
+		<b:navBar brand="#{agreementMB.marca}" brandHref="#" fluid="true" inverse="true">
+		  <b:navbarLinks>
+		  	<b:navLink value="Home" href="/MyClinic"></b:navLink>
+		    
+		    <b:dropMenu rendered="#{permissoesMB.areaPacientes[1]}" value="Pacientes" iconAwesome="fas fa-user-friends">
+		      <b:navLink rendered="#{permissoesMB.areaPacientes[0] and sessaoMB.ligacaoBD}" value="Inserir" href="/MyClinic/pacientes/form"></b:navLink>
+		      <b:navLink value="Visualizar" href="/MyClinic/pacientes"></b:navLink>
+		    </b:dropMenu>
+		    
+		    <b:dropMenu rendered="#{permissoesMB.areaMedicos[1]}" value="Médicos" iconAwesome="fas fa-user-md">
+		      <b:navLink rendered="#{permissoesMB.areaMedicos[0] and sessaoMB.ligacaoBD}" value="Inserir" href="/MyClinic/medicos/form"></b:navLink>
+		      <b:navLink value="Visualizar" href="/MyClinic/medicos"></b:navLink>
+		    </b:dropMenu>
+		    
+		    <b:dropMenu rendered="#{permissoesMB.areaConsultas[1]}" value="Consultas" iconAwesome="fas fa-heartbeat">
+		      <b:navLink rendered="#{permissoesMB.areaConsultas[0] and sessaoMB.ligacaoBD}" value="Inserir" href="/MyClinic/consultas/form"></b:navLink>
+		      <b:navLink value="Visualizar" href="/MyClinic/consultas"></b:navLink>
+		    </b:dropMenu>
+		    
+		    <b:dropMenu rendered="#{permissoesMB.areaUtilizadores[0] and sessaoMB.ligacaoBD}" value="Utilizadores" iconAwesome="fas fa-user">
+		      <b:navLink value="Inserir" href="/MyClinic/utilizadores/form"></b:navLink>
+		      <b:navLink value="Visualizar" href="/MyClinic/utilizadores"></b:navLink>
+		    </b:dropMenu>
+		    
+		  </b:navbarLinks>
+		  
+		  	<div style="float: right;display:inline-block;">
+			    <b:form class="form_fechar_sessao">
+			    
+				  <b:label severity="primary" text="Utilizador" />
+				  <b:label severity="secundary" text="#{sessaoMB.nomeUtilizador}" />
+				  <b:commandButton value="Sair" icon="fa-sign-out-alt" action="#{loginMB.logout()}"></b:commandButton>
+					
+				</b:form>
+			</div>
+		</b:navBar>
+	</h:body>
+</html>

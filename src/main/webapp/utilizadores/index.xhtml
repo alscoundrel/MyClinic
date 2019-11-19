@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:body>
+  
+        <ui:composition template="../WEB-INF/templates/layout.xhtml">
+  			<ui:define name="content">
+  				<h3 style="margin-top:0">Utilizadores</h3>
+  				<b:form id="form">
+		  			<p:dataTable var="utilizador" value="${utilizadorMB.utilizadorDAO.getLista()}" columnClasses="label,value">
+					 
+					    <p:column headerText="Utilizador">
+					        <h:outputText value="#{utilizador.nomeUtilizador}" />
+					    </p:column>
+
+					    <p:column headerText="Nível" style="width:80px;text-align:center;">
+					        <h:outputText value="#{utilizador.nivel}" style=""/>
+					    </p:column>
+
+					    <p:column headerText="Ultimo acesso" style="text-align:center;">
+					        <h:outputText value="#{consultaMB.dataFormatada(utilizador.ultimoAcesso)}" />
+					    </p:column>
+					    
+					    <!-- renderiza se tem pemissao para editar ou se o utilizador e o da sessao-->
+					    <p:column rendered="#{permissoesMB.areaUtilizadores[2] or (utilizador.id eq sessaoMB.utilizadorSessao.id)}" headerText="Acções" style="width:110px">
+					    	<p:commandButton icon="fa fa-pencil" action="#{utilizadorMB.editar()}">
+					    		<f:param name="id" value="#{utilizador.id}" />
+		                    </p:commandButton>
+		                    
+		                    <!-- renderiza se tem pemissao para eliminar e nao e o ultilizador com id 1 e, mem o utilizador da sessao -->
+	    					<p:commandButton rendered="#{permissoesMB.areaUtilizadores[3] and (utilizador.id ne 1) and (utilizador.id ne sessaoMB.utilizadorSessao.id)}" action="#{utilizadorMB.eliminar(utilizador)}"  icon="fa fa-trash">
+	    						<p:confirm header="Confirmation" message="Confirma a eliminação?" icon="ui-icon-alert" />
+	    					</p:commandButton>
+	    					
+							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+								<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+								<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+							</p:confirmDialog>
+							
+					    </p:column>
+					</p:dataTable>
+            		
+				</b:form>
+            </ui:define>
+        </ui:composition>
+  
+    </h:body>
+  
+</html>

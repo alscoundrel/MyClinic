@@ -1,0 +1,43 @@
+section {
+	margin: 17px 0;
+	min-height: 560px;
+}
+
+footer {
+	padding: 25px 0;
+}
+/* #content{
+	margin:10px 0;
+	min-height: 200px;
+} */
+.rodape{
+	background-color:rgba(200, 200, 200, 0.4);
+	padding:20px 0;
+	padding-left: 0 !important;
+    padding-right: 0 !important;
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+.form_fechar_sessao{
+}
+.form_fechar_sessao label{
+	display:block-inline;
+	margin:0 4;
+}
+.form_fechar_sessao button{
+	color: cornsilk;
+    background-color: transparent;
+    border:0;
+}
+.form_fechar_sessao button:hover{
+	color: aqua;
+    background-color: transparent;
+    border:0;
+}
+.meu_carousel {
+	max-height: 560px;
+}
+.center{
+	text-align:center;
+}

@@ -1,0 +1,34 @@
+body {
+	width: 100%;
+	height: 100%;
+	color: #f8f8f8;
+	background: url(../resources/img/intro-bg.jpg) no-repeat top center;
+	background-size: cover;
+}
+
+h1, h3 {
+	text-align: center;
+	color:white!important;
+	text-shadow: 1px 1px 0 #333;
+}
+
+.caixa_login {
+	width: 40%;
+	margin: auto;
+	margin-top: 20% !important;
+}
+
+form {
+	background-color: rgba(0, 0, 0, 0.3);
+    padding: 22px 20px 8px 20px;
+    box-shadow: 3px 3px #505050;
+}
+form label{
+	color:white!important;
+	text-shadow: 1px 1px 0 #333;
+}
+
+#codigo {
+	max-width: 153px;
+	margin: 0 0 12px 0;
+}

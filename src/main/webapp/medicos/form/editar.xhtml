@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:body onload="">
+  
+        <ui:composition template="../../WEB-INF/templates/layout.xhtml">
+  			<ui:define name="content">
+  				<b:container class="center"><h3 style="margin-top:0">Editar Médico</h3></b:container>
+  				
+  				<b:container style="margin:auto;">
+  					<b:container class="caixa_login" style="margin:auto;width:875px;">
+						<b:form id="form" horizontal="true">
+							<b:inputText value="#{medicoMB.medico.nome}" placeholder="Nome Completo" required="true" requiredMessage="Nome é obrigatório." label="Nome:"  colMd="10" labelColMd="2"/>
+							<br/>
+							
+							<b:inputText value="#{medicoMB.medico.nif}" placeholder="Nº fiscal" required="true" requiredMessage="NIF é obrigatório." label="NIF:" colMd="2" labelColMd="2">
+								<f:validateLength minimum="9" maximum="9" />
+							</b:inputText>
+							<br/>
+						    <b:inputText value="#{medicoMB.medico.email}"  required="false" placeholder="Endereço eletrónico" validatorMessage="Invalid email format" label="E-mail:" colMd="5" labelColMd="2">
+						    	
+						    </b:inputText>
+							<br/>
+						    <b:inputText value="#{medicoMB.medico.contacto}" placeholder="Nº de contacto" required="true" requiredMessage="Contacto é obrigatório." label="Contacto:" colMd="2" labelColMd="2">
+						    <f:validateLength minimum="9" maximum="15" />
+						    </b:inputText>
+							<br/>
+						    <b:inputText value="#{medicoMB.medico.morada}" placeholder="Residência" label="Morada:" colMd="10" labelColMd="2"/>
+							<br/>
+							<b:selectOneMenu value="#{medicoMB.id_especialidadeSelected}" converter="omnifaces.SelectItemsConverter"  required="true" label="Especialidade:" colMd="10"  labelColMd="2" select2="true">
+								<f:selectItem itemLabel="(Seleccione)" itemValue="" />
+		    					<f:selectItems value="#{medicoMB.especialidadeDAO.getLista()}" var="c" itemValue="#{c.id}" itemLabel="#{c.descricao}"/>
+		    				</b:selectOneMenu>
+						    
+							<b:messages id="msgs" style="text-align:left;"/>
+					 		<b:formGroup style="text-align:right;margin: 0;">
+					 			<b:commandButton label="" value="Actualizar" id="btnForm" update="@form" process="@form" action="#{medicoMB.actualizar()}" icon="ui-icon-star" style="width:92px;"></b:commandButton>
+					    	</b:formGroup>
+						</b:form>
+					</b:container>
+				</b:container>
+
+            </ui:define>
+            
+        </ui:composition>
+    </h:body>
+  
+</html>

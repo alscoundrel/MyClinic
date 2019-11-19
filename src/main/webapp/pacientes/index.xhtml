@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:body>
+  
+        <ui:composition template="../WEB-INF/templates/layout.xhtml">
+  			<ui:define name="content">
+  				<h3 style="margin-top:0">Pacientes</h3>
+  				<b:form id="form">
+  					<b:messages id="msgs" />
+		  			<p:dataTable var="paciente" value="${pacienteMB.pacienteDAO.getLista()}" columnClasses="label,value">
+					 
+					    <p:column headerText="Nome">
+					        <h:outputText value="#{paciente.nome}" />
+					    </p:column>
+					 
+					    <p:column headerText="NIF" style="width:100px">
+					        <h:outputText value="#{paciente.nif}" />
+					    </p:column>
+
+					    <p:column headerText="E-Mail">
+					        <h:outputText value="#{paciente.email}" />
+					    </p:column>
+					    				 
+					    <p:column headerText="Contacto" style="width:100px">
+					        <h:outputText value="#{paciente.contacto}" />
+					    </p:column>
+					    
+					    <p:column headerText="Morada">
+					        <h:outputText value="#{paciente.morada}" />
+					    </p:column>
+					    
+					    <p:column rendered="#{permissoesMB.areaPacientes[2]}" headerText="Acções" style="width:100px">
+					    	<p:commandButton icon="fa fa-pencil" action="#{pacienteMB.editar()}">
+					    		<f:param name="id" value="#{paciente.id}" />
+		                    </p:commandButton>
+		                    
+	    					<p:commandButton rendered="#{permissoesMB.areaPacientes[3]}" action="#{pacienteMB.eliminar(paciente)}"  icon="fa fa-trash">
+	    						<p:confirm header="Confirmation" message="Confirma a eliminação?" icon="ui-icon-alert" />  
+	    					</p:commandButton>
+	    					
+							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+								<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+								<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+							</p:confirmDialog>
+							
+					    </p:column>
+					</p:dataTable>
+            		
+				</b:form>
+            </ui:define>
+        </ui:composition>
+  
+    </h:body>
+  
+</html>

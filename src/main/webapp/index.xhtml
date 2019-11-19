@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+		<h:head>
+		  	<title>#{agreementMB.marca}</title>
+		  	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+		  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    	  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+    	  	<f:metadata>
+	          	<f:event type="preRenderView" listener="#{sessaoMB.verificaSeAutenticado('login')}"/>
+	          	<!-- <f:event type="preRenderView" listener="#{loginMB.logout()}"/> -->
+	      	</f:metadata>
+		  	<h:outputStylesheet library="css" name="geral.css" />
+		  	<h:outputStylesheet library="css" name="intro.css" />
+		</h:head>
+		<h:body style="background-color:#515c66;">
+	
+            <ui:insert name="menu" >
+              <ui:include src="WEB-INF/templates/menu_out.xhtml" />
+            </ui:insert>
+	        
+			<b:container style="margin:auto;">
+				<h1>#{agreementMB.marca}</h1>
+				<h3>Bem-vindo</h3>
+  				<b:container style="text-align:center;">
+  					<b:container class="caixa_login" style="margin:auto;width:475px;">
+						<b:form horizontal="true">
+							<b:inputText label-small-screen="4" small-screen="8"  label="Nome Utilizador:"
+						               value="#{loginMB.utilizador.nomeUtilizador}" tooltip="Nome para autenticacao">
+						  		<f:validateLength minimum="0" maximum="15" />
+						  	</b:inputText>
+						  
+						  	<b:inputSecret label-small-screen="4" small-screen="8" label="Palavra-passe:"
+						  				value="#{loginMB.utilizador.senha}" tooltip="Senha Secreta">
+								<f:validateLength minimum="0" maximum="20" />
+						  	</b:inputSecret>
+							
+							<b:formGroup style="text-align:right;margin: 0;">
+					 			<b:commandButton label="" value="Entrar" id="btnForm" update="@form" process="@form" action="#{loginMB.envia()}" disabled="#{loginMB.utilizadorDAO.dbDisabled}" icon="ui-icon-star" style="width:72px;"></b:commandButton>
+					    	</b:formGroup>
+					    <b:messages id="msgs" style="text-align:left"/>
+						</b:form>
+					</b:container>
+				</b:container>
+			</b:container>
+			
+           <ui:insert name="footer" >
+             <ui:include src="WEB-INF/templates/page_footer.xhtml" />
+           </ui:insert>
+		</h:body>
+</html>

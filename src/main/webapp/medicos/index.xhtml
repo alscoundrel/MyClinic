@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:body>
+  
+        <ui:composition template="../WEB-INF/templates/layout.xhtml">
+  			<ui:define name="content">
+  				<h3 style="margin-top:0">Medicos</h3>
+  				<b:form id="form">
+		  			<p:dataTable var="medico" value="${medicoMB.medicoDAO.getLista()}" columnClasses="label,value">
+					 
+					    <p:column headerText="Nome">
+					        <h:outputText value="#{medico.nome}" />
+					    </p:column>
+					 
+					    <p:column headerText="NIF" style="width:100px">
+					        <h:outputText value="#{medico.nif}" />
+					    </p:column>
+
+					    <p:column headerText="E-Mail">
+					        <h:outputText value="#{medico.email}" />
+					    </p:column>
+					    				 
+					    <p:column headerText="Contacto" style="width:100px">
+					        <h:outputText value="#{medico.contacto}" />
+					    </p:column>
+					    
+					    <p:column headerText="Especialidade">
+					        <h:outputText value="#{medico.especialidade.descricao}" />
+					    </p:column>
+					    
+					    <p:column headerText="Morada">
+					        <h:outputText value="#{medico.morada}" />
+					    </p:column>
+					    
+					    <p:column rendered="#{permissoesMB.areaMedicos[2]}" headerText="Acções" style="width:100px">
+					    	<p:commandButton icon="fa fa-pencil" action="#{medicoMB.editar()}">
+					    		<f:param name="id" value="#{medico.id}" />
+		                    </p:commandButton>
+		                    
+	    					<p:commandButton rendered="#{permissoesMB.areaMedicos[3]}" action="#{medicoMB.eliminar(medico)}"  icon="fa fa-trash">
+	    						<p:confirm header="Confirmation" message="Confirma a eliminação?" icon="ui-icon-alert" />  
+	    					</p:commandButton>
+	    					
+							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+								<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+								<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+							</p:confirmDialog>
+							
+					    </p:column>
+					</p:dataTable>
+            		
+				</b:form>
+            </ui:define>
+        </ui:composition>
+  
+    </h:body>
+  
+</html>

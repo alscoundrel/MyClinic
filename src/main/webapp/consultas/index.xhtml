@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:body>
+  
+        <ui:composition template="../WEB-INF/templates/layout.xhtml">
+  			<ui:define name="content">
+  				<h3 style="margin-top:0">Consultas</h3>
+  				<b:form id="form">
+		  			<p:dataTable var="consulta" value="${consultaMB.consultaDAO.getLista()}" columnClasses="label,value">
+					 
+					    <p:column headerText="Paciente">
+					        <h:outputText value="#{consulta.paciente.nome}" />
+					    </p:column>
+					 
+					    <p:column headerText="Medico">
+					        <h:outputText value="#{consulta.medico.nome}" />
+					    </p:column>
+					    
+					    <p:column headerText="Especialidade">
+					        <h:outputText value="#{consulta.medico.especialidade.descricao}" />
+					    </p:column>
+
+					    <p:column headerText="Data" style="width:120px">
+					        <h:outputText value="#{consultaMB.dataFormatada(consulta.marcacao)}" />
+					    </p:column>
+					    				 
+					    <p:column headerText="Prescricao">
+					        <h:outputText value="#{consulta.prescricao}" />
+					    </p:column>
+					    
+					    <p:column rendered="#{permissoesMB.areaConsultas[2]}" headerText="Acções" style="width:100px">
+					    	<p:commandButton rendered="#{not consulta.cancelada}" icon="fa fa-pencil" action="#{consultaMB.editar()}">
+					    		<f:param name="id" value="#{consulta.id}" />
+		                    </p:commandButton>
+	    					
+	    					<p:commandButton rendered="#{permissoesMB.areaConsultas[3] and not consulta.cancelada}" action="#{consultaMB.eliminar(consulta)}"  icon="fa fa-trash">
+	    						<p:confirm header="Confirmation" message="Confirma a eliminação?" icon="ui-icon-alert" />  
+	    					</p:commandButton>
+	    					
+							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+								<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+								<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+							</p:confirmDialog>
+							
+							<h:outputText value="Cancelada" rendered="#{consulta.cancelada}"/>
+							
+					    </p:column>
+					    
+					</p:dataTable>
+            		
+				</b:form>
+            </ui:define>
+        </ui:composition>
+  
+    </h:body>
+  
+</html>
