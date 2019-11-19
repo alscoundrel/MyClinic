@@ -16,3 +16,5 @@ MVC - aplicação em três camadas para gestão de uma clínica de cuidados méd
 - Contexts and Dependency Injection (CDI) «2.0»
 - WildFly «18.0» Servidor de aplicação de código fonte aberto
 - JDK 12.0.2
+
+### edite o ficheiro [persistence.xml](/tree/master/src/main/resources/META-INF)
