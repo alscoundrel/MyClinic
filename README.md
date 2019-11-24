@@ -25,3 +25,7 @@ MVC - aplicação em três camadas para gestão de uma clínica de cuidados méd
 - Utilizador: admin
 - Senha: admin
 - Nível: A (administrador)
+
+
+### templates
+:+1: estão na pasta [/src/main/webapp/WEB-INF/](../../tree/master/src/main/webapp/WEB-INF/) porque é uma pasta invisível no URL
